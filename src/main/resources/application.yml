@@ -1,0 +1,10 @@
+server:
+  port: 4000
+
+configs:
+  kafka:
+    groupId: 'avro-kafka-consumer'
+    concurrency: 5
+    topics:
+      customer: 'customer.notification.${spring.profiles.active}'
+      paymentbook: 'topic.paymentbook.movement-local'

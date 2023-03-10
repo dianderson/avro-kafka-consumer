@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class AvroKafkaConsumerApplication
+class Application
 
 fun main(args: Array<String>) {
-	runApplication<AvroKafkaConsumerApplication>(*args)
+	runApplication<Application>(*args)
 }

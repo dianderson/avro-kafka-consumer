@@ -1,0 +1,4 @@
+configs:
+  kafka:
+    kafka-server-url: localhost:9092
+    schema-registry-url: http://localhost:8081
