@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: avro-kafka-consumer-app
+    image: 'avro-kafka-consumer:latest'
+    build:
+      context: ./
+      args:
+        - JAR_FILE=build/libs/\*.jar
+    tty: true
+    stdin_open: true
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "4000:4000"
+    networks:
+      - avro-kafka-producer_local-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          memory: 128M
+
+networks:
+  avro-kafka-producer_local-network:
+    external: true
