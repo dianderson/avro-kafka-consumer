@@ -6,5 +6,4 @@ configs:
     groupId: 'avro-kafka-consumer'
     concurrency: 5
     topics:
-      customer: 'customer.notification.${spring.profiles.active}'
-      paymentbook: 'topic.paymentbook.movement-local'
+      customer: 'customer.notification.docker'

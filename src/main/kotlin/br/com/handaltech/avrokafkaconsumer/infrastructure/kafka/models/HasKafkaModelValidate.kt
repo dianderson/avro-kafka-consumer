@@ -1,13 +1,13 @@
 package br.com.handaltech.avrokafkaconsumer.infrastructure.kafka.models
 
-import jakarta.validation.ConstraintViolationException
+import br.com.handaltech.avrokafkaconsumer.infrastructure.kafka.consumers.CustomerConsumer
+import jakarta.validation.ConstraintViolation
 import jakarta.validation.Validation
+import org.apache.logging.log4j.LogManager
 
 interface HasKafkaModelValidate {
-    fun validateModel() = Validation
+    fun validateModel(): MutableSet<ConstraintViolation<HasKafkaModelValidate>> = Validation
         .buildDefaultValidatorFactory()
         .validator.validate(this)
-        .takeIf { it.isNotEmpty() }
-        ?.let { throw ConstraintViolationException(it) }
-        ?: this
+        .also { LogManager.getLogger(HasKafkaModelValidate::class).info("Logou na validação") }
 }

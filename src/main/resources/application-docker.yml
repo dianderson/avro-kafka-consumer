@@ -1,16 +1,3 @@
-spring:
-  datasource:
-    url: 'jdbc:postgresql://postgres:5432/postgres'
-    username: 'rootpostgres'
-    password: 'postgres@123'
-  data:
-    redis:
-      ssl: false
-      password: Redis@123
-      connect-timeout: 10s
-      host: redis
-      port: 6379
-
 configs:
   kafka:
     kafka-server-url: kafka:29092

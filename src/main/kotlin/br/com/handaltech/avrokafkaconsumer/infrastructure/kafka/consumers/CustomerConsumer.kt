@@ -1,6 +1,7 @@
 package br.com.handaltech.avrokafkaconsumer.infrastructure.kafka.consumers
 
 import br.com.handaltech.avrokafkaconsumer.infrastructure.kafka.models.CustomerKafkaModel
+import br.com.handaltech.avrokafkaconsumer.infrastructure.kafka.models.GenericKafkaErrorModel
 import br.com.handaltech.avrokafkaproducer.avros.CustomerAvro
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.logging.log4j.LogManager
@@ -18,11 +19,19 @@ class CustomerConsumer {
     )
     fun onListener(message: ConsumerRecord<String, CustomerAvro>, ack: Acknowledgment) {
         try {
-            logger.info(message.value().buildModel().validateModel())
+            val data = message.value().buildModel()
+            val errors = data.errors()
+            when {
+                errors.isEmpty() -> logger.info(data)
+                else -> logger.error("Errors: $errors")
+            }
             ack.acknowledge()
         } catch (ex: Exception) {
-            logger.error(ex.message)
-            throw ex
+            val genericError = GenericKafkaErrorModel(
+                className = this::class,
+                errors = setOf(ex.javaClass, ex.message.toString())
+            )
+            logger.error(genericError)
         }
     }
 

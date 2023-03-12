@@ -16,4 +16,7 @@ data class CustomerKafkaModel(
     @field:Email
     @field:NotNull
     val customerMail: String
-) : HasKafkaModelValidate
+) : HasKafkaError {
+    override fun className() = this::class
+    override fun errors() = validateModel()
+}
