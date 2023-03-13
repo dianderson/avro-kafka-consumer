@@ -28,7 +28,7 @@ class KafkaConsumerConfig(
         }
 
     private fun consumerFactory(): ConsumerFactory<String, Any> = hashMapOf<String, Any>().apply {
-        this[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = properties.kafkaServerUrl
+        this[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = properties.bootstrapServers
         this[ConsumerConfig.GROUP_ID_CONFIG] = properties.groupId
         this[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
         this[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java

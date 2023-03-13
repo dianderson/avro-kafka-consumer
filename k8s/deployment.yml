@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: avro-kafka-consumer
+  labels:
+    app: avro-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: avro-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: "avro-kafka-consumer"
+    spec:
+      containers:
+        - name: avro-kafka-consumer
+          image: diandersonmendonca/avro-kafka-consumer:latest
+          ports:
+            - containerPort: 4000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 60Mi
+            requests:
+              cpu: 500m
+              memory: 50Mi
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker

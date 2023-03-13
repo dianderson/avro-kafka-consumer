@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: avro-kafka-consumer
+spec:
+  selector:
+    app: avro-kafka-consumer
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: LoadBalancer
